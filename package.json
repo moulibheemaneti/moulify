@@ -27,6 +27,7 @@
   ],
   "scripts": {
     "build:icons": "bun run scripts/generate-icon-fonts.ts",
+    "prepare": "husky",
     "prepack": "nuxt-module-build build",
     "clean": "rm -rf playground/node_modules .nuxt dist node_modules bun.lock playground/dist",
     "clean-install": "bun run clean && bun i",
@@ -52,6 +53,9 @@
     "@nuxt/test-utils": "^4.0.0",
     "@types/node": "latest",
     "changelogen": "^0.6.2",
+    "husky": "^9.0.0",
+    "@commitlint/cli": "^19.0.0",
+    "@commitlint/config-conventional": "^19.0.0",
     "eslint": "^10.0.1",
     "fantasticon": "^4.1.0",
     "nuxt": "^4.3.1",
