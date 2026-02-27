@@ -1,6 +1,6 @@
 {
   "name": "moulify",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "My new Nuxt module",
   "repository": "https://github.com/moulibheemaneti/moulify",
   "license": "MIT",
@@ -26,6 +26,7 @@
     "playground"
   ],
   "scripts": {
+    "build:icons": "bun run scripts/generate-icon-fonts.ts",
     "prepack": "nuxt-module-build build",
     "clean": "rm -rf playground/node_modules .nuxt dist node_modules bun.lock playground/dist",
     "clean-install": "bun run clean && bun i",
@@ -52,7 +53,9 @@
     "@types/node": "latest",
     "changelogen": "^0.6.2",
     "eslint": "^10.0.1",
+    "fantasticon": "^4.1.0",
     "nuxt": "^4.3.1",
+    "sass": "^1.97.3",
     "typescript": "~5.9.3",
     "vitest": "^4.0.18",
     "vue-tsc": "^3.2.5"
