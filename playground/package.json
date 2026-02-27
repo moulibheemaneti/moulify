@@ -1,0 +1,14 @@
+{
+  "private": true,
+  "name": "moulify-playground",
+  "type": "module",
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "moulify": "../",
+    "nuxt": "^4.3.1"
+  }
+}
