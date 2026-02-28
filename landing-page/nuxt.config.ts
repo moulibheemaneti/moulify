@@ -1,6 +1,10 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  // Custom subdomain is at root; no path prefix
+  app: {
+    baseURL: '/',
+  },
   runtimeConfig: {
     public: {
       /** Custom domain for redirect (e.g. www.yourdomain.com). Set NUXT_PUBLIC_CUSTOM_DOMAIN in CI or here. */
