@@ -1,1 +1,0 @@
-{"v":5,"entries":{"button--primary":{"type":"story","subtype":"story","id":"button--primary","name":"Primary","title":"Button","importPath":"./components/Button.stories.ts","componentPath":"../src/runtime/app/components/Button/index.vue","tags":["dev","test","manifest"],"exportName":"Primary"}}}

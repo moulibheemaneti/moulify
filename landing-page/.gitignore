@@ -25,3 +25,5 @@ logs
 
 *storybook.log
 storybook-static
+
+public/storybook
