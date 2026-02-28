@@ -6,6 +6,8 @@ on:
       - main
     paths:
       - "landing-page/**"
+      - ".github/workflows/landing-page.yml"
+  workflow_dispatch:
 
 concurrency:
   group: landing-page-deploy
