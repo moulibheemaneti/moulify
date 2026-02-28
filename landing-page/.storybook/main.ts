@@ -1,6 +1,9 @@
 import type { StorybookConfig } from '@storybook/vue3-vite'
 import vue from '@vitejs/plugin-vue'
 
+const customDomain = process.env.NUXT_PUBLIC_CUSTOM_DOMAIN || 'https://moulify.moulibheemaneti.com'
+const targetHost = customDomain.replace(/^https?:\/\//, '').split('/')[0]
+
 const config: StorybookConfig = {
   stories: [
     '../components/**/*.stories.@(js|jsx|ts|tsx|mdx)',
@@ -9,6 +12,20 @@ const config: StorybookConfig = {
   framework: {
     name: '@storybook/vue3-vite',
     options: {},
+  },
+  // Redirect *.github.io to custom domain when Storybook is opened directly (production).
+  // The Nuxt app’s redirect.client.ts only runs inside the Nuxt app; Storybook is static HTML.
+  managerHead(head) {
+    if (!targetHost) {
+      return head
+    }
+    return `${head}<script>
+(function(){
+  var h=window.location.host,t="${targetHost.replace(/"/g, '\\"')}";
+  if(h!==t&&(h.endsWith(".github.io")||h==="github.io"))
+    window.location.replace(window.location.protocol+"//"+t+window.location.pathname+window.location.search);
+})();
+</script>`
   },
   viteFinal: async (config) => {
     config.base = '/storybook/'
