@@ -41,7 +41,7 @@ jobs:
 
       - name: Build Storybook
         working-directory: landing-page
-        run: storybook build --output-dir public/storybook
+        run: bun run storybook build --output-dir public/storybook
         env:
           NUXT_PUBLIC_CUSTOM_DOMAIN: ${{ vars.CUSTOM_DOMAIN }}
 
