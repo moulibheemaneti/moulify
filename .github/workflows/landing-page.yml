@@ -37,7 +37,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: landing-page
-        run: bun install --frozen-lockfile
+        run: bun install
 
       - name: Build Storybook
         working-directory: landing-page
