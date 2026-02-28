@@ -39,6 +39,10 @@ jobs:
         working-directory: landing-page
         run: bun install --frozen-lockfile
 
+      - name: Build Storybook
+        working-directory: landing-page
+        run: bun run build-storybook
+
       - name: Generate static site
         working-directory: landing-page
         run: bun run generate
