@@ -7,15 +7,15 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import type { Icons } from '~/src/assets/generated/fonts/icons'
+import type { Icons } from '../../../../assets/generated/fonts/icons'
 import { ALL_ICONS } from '../../../../utils/constants'
 import type { IconProps } from './types'
 
-defineOptions({ name: 'NcIcon' })
+defineOptions({ name: 'MoulifyIcon' })
 
 const props = withDefaults(defineProps<IconProps>(), {
   size: 24,
-  color: 'white',
+  color: 'black',
 })
 
 const isIconValid = computed(() => ALL_ICONS.includes(props.name as Icons))

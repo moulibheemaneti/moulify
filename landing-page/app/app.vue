@@ -104,7 +104,6 @@
 </template>
 
 <script setup lang="ts">
-// eslint-disable-next-line @stylistic/semi
 import { useHead } from '#imports';
 
 useHead({
