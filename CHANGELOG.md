@@ -4,6 +4,20 @@ All notable changes to `moulify` will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.2] - 2026-03-01
+
+### Added
+- **Header**, **Footer**, and **SocialLinks** components with types and runtime integration.
+- Custom color palette injection: theme colors are injectable via module options and `useMoulifyColors()`.
+- Storybook stories for Button, Footer, Header, Icon, and SocialLinks in the landing page.
+- `colorPalette` utility and expanded theme/color types in `src/types.ts`.
+
+### Changed
+- Button component extended with additional variants and type definitions.
+- Icon component and types updated.
+- Module now registers Header, Footer, and SocialLinks; plugin updated for color injection.
+- Landing page Storybook preview config and playground app updated to showcase new components.
+
 ## [0.0.1] - 2026-02-27
 
 ### Added
