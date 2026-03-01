@@ -30,12 +30,9 @@ const props = withDefaults(defineProps<FooterProps>(), {
 
 const config = inject<MoulifyPublicConfig>('moulifyConfig', {})
 
-const effectiveCopyright = computed(
-  () => props.copyrightText ?? config.footer?.copyrightText ?? '',
-)
-const effectiveLinks = computed(
-  () => props.hasLinks ?? config.footer?.hasLinks ?? [],
-)
+const effectiveCopyright = computed(() => props.copyrightText ?? config.footer?.copyrightText ?? '',)
+
+const effectiveLinks = computed(() => props.hasLinks ?? config.footer?.hasLinks ?? [])
 
 const separator = ' · '
 </script>
@@ -43,8 +40,8 @@ const separator = ' · '
 <style lang="scss">
 .moulify-footer {
   padding: 24px 16px;
-  background-color: var(--moulify-secondary-100, #f5f5f5);
-  color: var(--moulify-secondary-700, #333);
+  // background-color: var(--moulify-secondary-100, #f5f5f5);
+  // color: var(--moulify-secondary-700, #333);
   border-top: 1px solid var(--moulify-tertiary-200, #ddd);
 }
 

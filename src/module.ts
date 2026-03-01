@@ -27,15 +27,20 @@ export default defineNuxtModule<ModuleOptions>({
       tertiary: normalizeToPalette(options.colors?.tertiary),
     }
 
-    nuxt.options.runtimeConfig.public.moulify = nuxt.options.runtimeConfig.public?.moulify ?? {}
+    const existingMoulify = nuxt.options.runtimeConfig.public?.moulify as MoulifyPublicConfig | undefined
 
-      ; (nuxt.options.runtimeConfig.public as any).moulify = {
-        ...(nuxt.options.runtimeConfig.public as any).moulify,
-        colors: resolvedColors,
-        socialLinks: options.socialLinks,
-        header: options.header,
-        footer: options.footer,
-      } as MoulifyPublicConfig
+    const publicMoulify: MoulifyPublicConfig = {
+      ...existingMoulify,
+      colors: resolvedColors,
+      socialLinks: options.socialLinks ?? existingMoulify?.socialLinks,
+      header: options.header ?? existingMoulify?.header,
+      footer: options.footer ?? existingMoulify?.footer,
+    }
+
+    nuxt.options.runtimeConfig.public = {
+      ...nuxt.options.runtimeConfig.public,
+      moulify: publicMoulify,
+    }
 
     // Do not add the extension since the `.ts` will be transpiled to `.mjs` after `npm run prepack`
     addPlugin(resolver.resolve('./runtime/plugin'))

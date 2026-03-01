@@ -15,7 +15,7 @@ defineOptions({ name: 'MoulifyIcon' })
 
 const props = withDefaults(defineProps<IconProps>(), {
   size: 24,
-  color: 'white',
+  color: 'black',
 })
 
 const isIconValid = computed(() => ALL_ICONS.includes(props.name as Icons))
