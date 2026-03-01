@@ -1,5 +1,5 @@
 import { addComponentsDir, addPlugin, createResolver, defineNuxtModule } from '@nuxt/kit'
-import type { ModuleOptions, MoulifyResolvedColors } from './types'
+import type { ModuleOptions, MoulifyPublicConfig, MoulifyResolvedColors } from './types'
 import { normalizeToPalette } from './utils/colorPalette'
 
 const versionFromPackageJson = (await import('../package.json')).version
@@ -11,7 +11,6 @@ export default defineNuxtModule<ModuleOptions>({
     version: versionFromPackageJson,
   },
   defaults: {
-    prefix: 'moulify',
     colors: {
       primary: '#0076ff', // little element plus default blue
       secondary: '#000', // black
@@ -29,10 +28,14 @@ export default defineNuxtModule<ModuleOptions>({
     }
 
     nuxt.options.runtimeConfig.public.moulify = nuxt.options.runtimeConfig.public?.moulify ?? {}
-    ;(nuxt.options.runtimeConfig.public as any).moulify = {
-      ...(nuxt.options.runtimeConfig.public as any).moulify,
-      colors: resolvedColors,
-    }
+
+      ; (nuxt.options.runtimeConfig.public as any).moulify = {
+        ...(nuxt.options.runtimeConfig.public as any).moulify,
+        colors: resolvedColors,
+        socialLinks: options.socialLinks,
+        header: options.header,
+        footer: options.footer,
+      } as MoulifyPublicConfig
 
     // Do not add the extension since the `.ts` will be transpiled to `.mjs` after `npm run prepack`
     addPlugin(resolver.resolve('./runtime/plugin'))
@@ -47,7 +50,7 @@ export default defineNuxtModule<ModuleOptions>({
       // optional: control naming
       pathPrefix: false,
       // prefix controls auto-imported component names, e.g. <nc-button>, <moulify-button>
-      prefix: options.prefix,
+      prefix: 'moulify',
       // optional: restrict to .vue files (types.ts will be ignored anyway)
       extensions: ['.vue'],
     })

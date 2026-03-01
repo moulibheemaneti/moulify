@@ -1,13 +1,9 @@
-export interface ModuleOptions {
-  /**
-   * Prefix used for auto-registered components.
-   *
-   * Example:
-   * - prefix: 'nc'    -> <nc-button>, <nc-header>
-   * - prefix: 'moulify' (default) -> <moulify-button>, <moulify-header>
-   */
-  prefix?: string
+/**
+ * Global types for the Moulify Nuxt module (module options, runtime config, colors).
+ * Component-level types live in each component's folder (e.g. Button/types.ts).
+ */
 
+export interface ModuleOptions {
   /**
    * Colors used for the module. Each of primary, secondary, and tertiary can be:
    * - A hex string (e.g. '#0076ff'): a full palette (50, 100, … 900) is generated from it.
@@ -18,6 +14,28 @@ export interface ModuleOptions {
    * - colors: { primary: { 50: '#eff6ff', 100: '#dbeafe', ..., 900: '#1e3a8a' } }
    */
   colors?: MoulifyModuleColors
+
+  /**
+   * Social links: optional URLs per platform (twitter, github, instagram, facebook, x).
+   */
+  socialLinks?: Partial<Record<'twitter' | 'github' | 'instagram' | 'facebook' | 'x', string>>
+
+  /**
+   * Header navigation: left, center, and right link groups.
+   */
+  header?: {
+    left?: Array<{ name: string, url: string }>
+    center?: Array<{ name: string, url: string }>
+    right?: Array<{ name: string, url: string }>
+  }
+
+  /**
+   * Footer config: copyright text and optional links.
+   */
+  footer?: {
+    copyrightText?: string
+    hasLinks?: Array<{ name: string, url: string }>
+  }
 }
 
 /**
@@ -60,4 +78,14 @@ export interface MoulifyResolvedColors {
   primary?: ColorPalette
   secondary?: ColorPalette
   tertiary?: ColorPalette
+}
+
+/**
+ * Public runtime config exposed to the app (colors + component config).
+ */
+export interface MoulifyPublicConfig {
+  colors?: MoulifyResolvedColors
+  socialLinks?: ModuleOptions['socialLinks']
+  header?: ModuleOptions['header']
+  footer?: ModuleOptions['footer']
 }

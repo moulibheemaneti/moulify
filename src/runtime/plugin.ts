@@ -1,9 +1,9 @@
 import { type NuxtApp, defineNuxtPlugin, useRuntimeConfig } from 'nuxt/app'
-import type { ColorPalette, MoulifyResolvedColors } from '../types'
+import type { ColorPalette, MoulifyResolvedColors, MoulifyPublicConfig } from '../types'
 
 declare module 'nuxt/schema' {
   interface PublicRuntimeConfig {
-    moulify?: { colors?: MoulifyResolvedColors }
+    moulify?: MoulifyPublicConfig
   }
 }
 
@@ -43,6 +43,5 @@ export default defineNuxtPlugin((nuxtApp: NuxtApp) => {
   }
 
   nuxtApp.provide('moulifyColors', colors ?? {})
-
-  console.log('Plugin injected by moulify!')
+  nuxtApp.provide('moulifyConfig', config.public.moulify ?? {})
 })

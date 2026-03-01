@@ -11,7 +11,7 @@ import type { Icons } from '../../../../assets/generated/fonts/icons'
 import { ALL_ICONS } from '../../../../utils/constants'
 import type { IconProps } from './types'
 
-defineOptions({ name: 'NcIcon' })
+defineOptions({ name: 'MoulifyIcon' })
 
 const props = withDefaults(defineProps<IconProps>(), {
   size: 24,

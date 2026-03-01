@@ -10,7 +10,7 @@ export default createConfigForNuxt({
     // Rules for module authors
     tooling: true,
     // Rules for formatting
-    stylistic: true,
+    stylistic: false,
     typescript: true,
   },
   dirs: {

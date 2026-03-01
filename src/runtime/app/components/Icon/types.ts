@@ -1,4 +1,4 @@
-import type { IconsId } from '~/src/assets/generated/fonts/icons'
+import type { IconsId } from '../../../../assets/generated/fonts/icons'
 
 /**
  * Props for the Icon component.
@@ -11,14 +11,14 @@ export interface IconProps {
   name: IconsId
 
   /**
-   * Font size for the icon.
+   * Font size for the icon (px).
    *
    * @default 24
    */
   size?: number
 
   /**
-   * Color of the icon.
+   * Color of the icon (CSS color value).
    *
    * @default "currentColor" - Depending on SVG color.
    */
