@@ -52,7 +52,7 @@ jobs:
 
       - name: Generate static site (Nuxt)
         working-directory: landing-page
-        run: nuxt generate
+        run: bun run nuxt generate
         env:
           NUXT_PUBLIC_CUSTOM_DOMAIN: ${{ vars.CUSTOM_DOMAIN }}
 
