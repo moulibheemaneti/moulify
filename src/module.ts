@@ -37,6 +37,10 @@ export default defineNuxtModule<ModuleOptions>({
     // Do not add the extension since the `.ts` will be transpiled to `.mjs` after `npm run prepack`
     addPlugin(resolver.resolve('./runtime/plugin'))
 
+    // Register icons CSS globally so it's included in the app (playground and consumers)
+    nuxt.options.css = nuxt.options.css ?? []
+    nuxt.options.css.push(resolver.resolve('./assets/generated/fonts/icons.css'))
+
     addComponentsDir({
       // points to src/runtime/app/components
       path: resolver.resolve('runtime/app/components'),

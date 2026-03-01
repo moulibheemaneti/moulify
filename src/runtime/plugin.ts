@@ -1,5 +1,4 @@
 import { type NuxtApp, defineNuxtPlugin, useRuntimeConfig } from 'nuxt/app'
-import '../assets/generated/fonts/icons.css'
 import type { ColorPalette, MoulifyResolvedColors } from '../types'
 
 declare module 'nuxt/schema' {
