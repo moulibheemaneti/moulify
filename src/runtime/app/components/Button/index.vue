@@ -18,9 +18,8 @@ const props = withDefaults(defineProps<ButtonProps>(), {
 
 <style lang="scss">
 .moulify-btn {
-  background-color: black;
+  background-color: var(--moulify-primary-500, #0076ff);
   align-items: center;
-  // background-color: v-bind('colors.primary');
   color: #fff;
   padding: 10px;
   border-radius: 5px;

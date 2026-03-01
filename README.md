@@ -87,16 +87,37 @@ Module options are available under the `moulify` key in your `nuxt.config`:
 interface ModuleOptions {
   prefix?: string
   colors?: {
-    primary?: string
-    secondary?: string
-    tertiary?: string
+    primary?: string | ColorPalette
+    secondary?: string | ColorPalette
+    tertiary?: string | ColorPalette
   }
+}
+
+// Full palette (all shades from 50 to 900)
+interface ColorPalette {
+  50: string
+  100: string
+  200: string
+  300: string
+  400: string
+  500: string
+  600: string
+  700: string
+  800: string
+  900: string
 }
 ```
 
 - `prefix` (default: `'moulify'`): controls the tag names of auto-imported components.
   - For example, with `prefix: 'nc'` you will use `<nc-button>` instead of `<moulify-button>`.
-- `colors`: simple color tokens you can use in your own styling or future theme extensions.
+- `colors`: primary, secondary, and tertiary can be:
+  - **A hex string** (e.g. `'#0076ff'`): a full palette with shades 50, 100, 200, … 900 is generated automatically (500 = your base color).
+  - **A full palette object**: provide your own `{ 50: '#…', 100: '#…', …, 900: '#…' }` for full control.
+
+The resolved palettes are exposed as **CSS custom properties** on `:root` and via **runtime config**:
+
+- **CSS variables**: `--moulify-primary-50` … `--moulify-primary-900`, and the same for `--moulify-secondary-*` and `--moulify-tertiary-*`. Use them in your styles, e.g. `background: var(--moulify-primary-500);`.
+- **In app**: `useRuntimeConfig().public.moulify.colors` and the plugin provides `$moulifyColors` (e.g. `const { $moulifyColors } = useNuxtApp()`).
 
 ## Components
 

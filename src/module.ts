@@ -1,5 +1,6 @@
 import { addComponentsDir, addPlugin, createResolver, defineNuxtModule } from '@nuxt/kit'
-import type { ModuleOptions } from './types'
+import type { ModuleOptions, MoulifyResolvedColors } from './types'
+import { normalizeToPalette } from './utils/colorPalette'
 
 const versionFromPackageJson = (await import('../package.json')).version
 
@@ -17,8 +18,21 @@ export default defineNuxtModule<ModuleOptions>({
       tertiary: '#888', // grey
     },
   },
-  setup(options, _nuxt) {
+  setup(options, nuxt) {
     const resolver = createResolver(import.meta.url)
+
+    // Resolve colors to full palettes (50, 100, … 900)
+    const resolvedColors: MoulifyResolvedColors = {
+      primary: normalizeToPalette(options.colors?.primary),
+      secondary: normalizeToPalette(options.colors?.secondary),
+      tertiary: normalizeToPalette(options.colors?.tertiary),
+    }
+
+    nuxt.options.runtimeConfig.public.moulify = nuxt.options.runtimeConfig.public?.moulify ?? {}
+    ;(nuxt.options.runtimeConfig.public as any).moulify = {
+      ...(nuxt.options.runtimeConfig.public as any).moulify,
+      colors: resolvedColors,
+    }
 
     // Do not add the extension since the `.ts` will be transpiled to `.mjs` after `npm run prepack`
     addPlugin(resolver.resolve('./runtime/plugin'))

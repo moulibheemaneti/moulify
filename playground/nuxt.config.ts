@@ -9,5 +9,10 @@ export default defineNuxtConfig({
   compatibilityDate: 'latest',
   moulify: {
     // prefix: "nc",
+    colors: {
+      primary: '#0076ff',
+      secondary: '#000',
+      tertiary: '#888',
+    },
   },
 })
