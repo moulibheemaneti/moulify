@@ -5,11 +5,11 @@
   "scripts": {
     "build": "bun build-storybook && nuxt build",
     "dev": "bun build-storybook && nuxt dev",
-    "generate": "nuxt generate",
+    "generate": "bun build-storybook && nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build --output-dir storybook-static"
+    "build-storybook": "storybook build --output-dir public/storybook"
   },
   "dependencies": {
     "nuxt": "^4.3.1",

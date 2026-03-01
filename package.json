@@ -33,7 +33,7 @@
     "clean-install": "bun run clean && bun i",
     "dev": "bun run dev:prepare && nuxt dev playground",
     "dev:clean": "bun run clean-install && bun run dev",
-    "landing:dev": "bun run landing:prepare && nuxt dev landing-page",
+    "landing:dev": "bun run landing:prepare && cd landing-page && bun run dev",
     "dev:build": "nuxt build playground",
     "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxt prepare playground",
     "landing:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxt prepare landing-page",
@@ -41,8 +41,7 @@
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest watch",
-    "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit",
-    "dev:landing": "nuxt prepare landing-page && nuxt dev landing-page"
+    "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit"
   },
   "dependencies": {
     "@nuxt/kit": "^4.3.1",
