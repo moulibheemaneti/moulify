@@ -21,7 +21,7 @@ export default createConfigForNuxt({
 })
   .append(
     {
-      ignores: ['assets/**', 'src/assets/generated/**'],
+      ignores: ['assets/**', 'src/assets/generated/**', 'landing-page/public/storybook/**', 'landing-page/storybook-static/**'],
     },
     // File-specific overrides for stores and composables
     {

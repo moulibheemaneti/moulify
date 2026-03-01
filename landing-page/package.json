@@ -9,7 +9,7 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build --output-dir public/storybook"
+    "build-storybook": "storybook build --output-dir storybook-static"
   },
   "dependencies": {
     "nuxt": "^4.3.1",

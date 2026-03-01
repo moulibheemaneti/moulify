@@ -39,6 +39,12 @@ jobs:
         working-directory: landing-page
         run: bun install
 
+      - name: Build Storybook
+        working-directory: landing-page
+        run: bun run build-storybook
+        env:
+          NUXT_PUBLIC_CUSTOM_DOMAIN: ${{ vars.CUSTOM_DOMAIN }}
+
       - name: Generate static site
         working-directory: landing-page
         run: bun run generate
@@ -46,17 +52,12 @@ jobs:
           # Optional: set in repo Settings → Secrets and variables → Actions → Variables
           NUXT_PUBLIC_CUSTOM_DOMAIN: ${{ vars.CUSTOM_DOMAIN }}
 
-      - name: Build Storybook
-        working-directory: landing-page
-        run: bun run build-storybook
-        env:
-          NUXT_PUBLIC_CUSTOM_DOMAIN: ${{ vars.CUSTOM_DOMAIN }}
-
-      # - name: Ensure Storybook in publish output
-      #   run: |
-      #     cp -r landing-page/public/storybook landing-page/.output/public/storybook
-      #     ls -la landing-page/.output/public/
-      #     ls -la landing-page/.output/public/storybook/ || true
+      - name: Add Storybook to publish output
+        run: |
+          cp -r landing-page/storybook-static landing-page/.output/public/storybook
+          touch landing-page/.output/public/.nojekyll
+          ls -la landing-page/.output/public/
+          ls landing-page/.output/public/storybook/ | head -20
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
