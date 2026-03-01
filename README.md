@@ -1,6 +1,4 @@
 <!--
-Get your module up and running quickly.
-
 Find and replace all on all files (CMD+SHIFT+F):
 - Name: My Module
 - Package name: moulify
@@ -14,39 +12,52 @@ Find and replace all on all files (CMD+SHIFT+F):
 [![License][license-src]][license-href]
 [![Nuxt][nuxt-src]][nuxt-href]
 
-moulify is a Nuxt module that provides a small, opinionated UI layer with:
+**The component library built for Nuxt.**
 
-- Auto-registered Vue components (Button, Icon)
-- A Fantasticon-generated icon font wired into Nuxt via a plugin
-- Simple theming via color configuration and component prefixing
+**[→ Live site & Storybook](https://moulify.moulibheemaneti.com)**
 
-- [✨ &nbsp;Release Notes](/CHANGELOG.md)
-<!-- - [🏀 Online playground](https://stackblitz.com/github/moulibheemaneti/moulify?file=playground%2Fapp.vue) -->
-<!-- - [📖 &nbsp;Documentation](https://example.com) -->
+Moulify is an open-source component library delivered as a single Nuxt module. It gives your app a unified set of UI building blocks—buttons, icons, form elements, and more on the way—backed by a consistent design language and a massive icon system. No glue code, no style conflicts, no juggling five different packages. One module, one design system, ready to grow with your product.
+
+A growing collection of production-ready Vue 3 components, 1,000+ type-safe icons, and a theming system—shipped as one Nuxt module. Install it, add one line to your config, and start building.
+
+- [✨ Release Notes](/CHANGELOG.md)
+- [📖 Live site & Storybook](https://moulify.moulibheemaneti.com)
+
+---
+
+## Vision
+
+Moulify is building toward a **complete, production-ready component library** for the Nuxt ecosystem. Instead of stitching together headless primitives from different authors, you get a single module with:
+
+- **A cohesive design language** — Every component follows the same tokens and patterns.
+- **A growing set of components** — Starting with Button and Icon, with more shipping regularly. The goal: every UI building block your Nuxt app needs, in one package.
+- **An ever-expanding icon system** — 1,000+ type-safe icons, all built for Vue 3 and Nuxt from the ground up.
+
+**Open source & community-driven** — MIT licensed, contributions welcome. Shape the library alongside other Nuxt developers.
+
+---
 
 ## Features
 
-- Auto-imports components from the module:
-  - `<moulify-button>` (or with your own prefix)
-  - `<moulify-icon>`
-- Configurable prefix for auto-registered components
-- Simple color theming exposed as module options
-- Icon component backed by a generated icon font with type-safe icon names
-- Nuxt plugin that automatically injects the icon CSS
+- **Auto-imports** — Components from the module: `<moulify-button>`, `<moulify-icon>` (or your own prefix).
+- **Configurable prefix** — Use your own tag names (e.g. `<nc-button>`).
+- **Simple color theming** — Primary, secondary, tertiary via module options; palettes generated or custom.
+- **Type-safe icons** — Fantasticon-generated icon font with TypeScript union types; typos caught at build time.
+- **Zero setup** — One install, one line in your config. No CSS imports to remember, no global plugin registration, no separate icon package. It just works.
+
+---
 
 ## Quick setup
 
-Install the module to your Nuxt application with:
+Install the module:
 
 ```bash
 npx nuxt module add moulify
 ```
 
-This will install `moulify` and add it to the `modules` section of your `nuxt.config`.
+This installs `moulify` and adds it to the `modules` section of your `nuxt.config`.
 
 ### Manual installation
-
-If you prefer to wire things up yourself:
 
 ```bash
 npm install moulify
@@ -63,7 +74,6 @@ export default defineNuxtConfig({
   modules: ['moulify'],
 
   moulify: {
-    // Optional: override defaults
     prefix: 'moulify',
     colors: {
       primary: '#0076ff',
@@ -79,9 +89,11 @@ The module will:
 - Register a Nuxt plugin that imports the generated icon CSS
 - Auto-register all Vue components from the module using the configured `prefix`
 
+---
+
 ## Configuration
 
-Module options are available under the `moulify` key in your `nuxt.config`:
+Module options under the `moulify` key:
 
 ```ts
 interface ModuleOptions {
@@ -93,39 +105,28 @@ interface ModuleOptions {
   }
 }
 
-// Full palette (all shades from 50 to 900)
 interface ColorPalette {
   50: string
   100: string
-  200: string
-  300: string
-  400: string
-  500: string
-  600: string
-  700: string
-  800: string
+  // ... 200–800
   900: string
 }
 ```
 
-- `prefix` (default: `'moulify'`): controls the tag names of auto-imported components.
-  - For example, with `prefix: 'nc'` you will use `<nc-button>` instead of `<moulify-button>`.
-- `colors`: primary, secondary, and tertiary can be:
-  - **A hex string** (e.g. `'#0076ff'`): a full palette with shades 50, 100, 200, … 900 is generated automatically (500 = your base color).
-  - **A full palette object**: provide your own `{ 50: '#…', 100: '#…', …, 900: '#…' }` for full control.
+- **`prefix`** (default: `'moulify'`) — Tag names for auto-imported components (e.g. `prefix: 'nc'` → `<nc-button>`).
+- **`colors`** — Primary, secondary, tertiary:
+  - **Hex string** (e.g. `'#0076ff'`) — Full palette (50–900) generated automatically.
+  - **Full palette object** — Your own `{ 50: '#…', …, 900: '#…' }`.
 
-The resolved palettes are exposed as **CSS custom properties** on `:root` and via **runtime config**:
+Resolved palettes are exposed as **CSS custom properties** on `:root` (`--moulify-primary-50` … `--moulify-primary-900`, etc.) and via **runtime config** (`useRuntimeConfig().public.moulify.colors`, `$moulifyColors`).
 
-- **CSS variables**: `--moulify-primary-50` … `--moulify-primary-900`, and the same for `--moulify-secondary-*` and `--moulify-tertiary-*`. Use them in your styles, e.g. `background: var(--moulify-primary-500);`.
-- **In app**: `useRuntimeConfig().public.moulify.colors` and the plugin provides `$moulifyColors` (e.g. `const { $moulifyColors } = useNuxtApp()`).
+---
 
 ## Components
 
 ### `<moulify-button>`
 
-A simple, flex-centered button that can render icons on the left and/or right.
-
-With the default prefix:
+Flex-centered button with optional left/right icons.
 
 ```vue
 <template>
@@ -135,18 +136,12 @@ With the default prefix:
 </template>
 ```
 
-Props:
-
-- `iconLeft?: IconsId` – optional icon name rendered before the button content.
-- `iconRight?: IconsId` – optional icon name rendered after the button content.
-
-These icon names are derived from the generated icon font (`IconsId` union type). The corresponding icons are rendered via `<moulify-icon>`.
+- `iconLeft?: IconsId` — Icon before content.
+- `iconRight?: IconsId` — Icon after content.
 
 ### `<moulify-icon>`
 
-A lightweight icon component backed by the Fantasticon-generated font family.
-
-With the default prefix:
+Icon component backed by the Fantasticon-generated font.
 
 ```vue
 <template>
@@ -154,48 +149,33 @@ With the default prefix:
 </template>
 ```
 
-Props:
+- `name: IconsId` — Required, type-safe icon name.
+- `size?: number` (default: `24`) — Font size in pixels.
+- `color?: string` (default: `'currentColor'`) — CSS color.
 
-- `name: IconsId` – required icon name, type-safe union of all available icons.
-- `size?: number` (default: `24`) – font size in pixels.
-- `color?: string` (default: `'currentColor'`) – CSS color to apply.
+Icon font CSS is injected by the module’s Nuxt plugin; no manual styles needed.
 
-If an invalid icon name is passed, the component will fall back to rendering the `name` as uppercase text so you can easily spot configuration issues in the UI.
-
-The required CSS for the icon font is automatically imported by the module’s Nuxt plugin, so you don’t need to manually include any styles.
-
+---
 
 ## Contribution
 
 <details>
   <summary>Local development</summary>
-  
+
   ```bash
-  # Install dependencies
   npm install
-  
-  # Generate type stubs
   npm run dev:prepare
-  
-  # Develop with the playground
   npm run dev
-  
-  # Build the playground
   npm run dev:build
-  
-  # Run ESLint
   npm run lint
-  
-  # Run Vitest
   npm run test
   npm run test:watch
-  
-  # Release new version
   npm run release
   ```
 
 </details>
 
+---
 
 <!-- Badges -->
 [npm-version-src]: https://img.shields.io/npm/v/moulify/latest.svg?style=flat&colorA=020420&colorB=00DC82

@@ -1,8 +1,9 @@
 {
   "name": "moulify",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "My new Nuxt module",
   "repository": "https://github.com/moulibheemaneti/moulify",
+  "homepage": "https://moulify.moulibheemaneti.com",
   "license": "MIT",
   "type": "module",
   "exports": {
