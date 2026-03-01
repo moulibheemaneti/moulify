@@ -3,6 +3,7 @@ export default defineNuxtConfig({
 
   modules: ['@nuxtjs/storybook'],
   devtools: { enabled: true },
+  ssr: false,
 
   // Custom subdomain is at root; no path prefix
   app: {
