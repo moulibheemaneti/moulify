@@ -1,4 +1,5 @@
-name: Deploy Landing Page
+# Based on: https://storybook.js.org/docs/sharing/publish-storybook#github-pages
+name: Build and Publish Landing Page (with Storybook) to GitHub Pages
 
 on:
   push:
@@ -9,26 +10,33 @@ on:
       - ".github/workflows/landing-page.yml"
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 concurrency:
-  group: landing-page-deploy
-  cancel-in-progress: true
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pages: write
-      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: "npm"
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -39,17 +47,23 @@ jobs:
         working-directory: landing-page
         run: bun install
 
-      - name: Generate static site
+      - name: Build Storybook
         working-directory: landing-page
-        run: bun run generate
+        run: bun run build-storybook
+
+      - name: Generate static site (Nuxt)
+        working-directory: landing-page
+        run: nuxt generate
         env:
-          # Optional: set in repo Settings → Secrets and variables → Actions → Variables
           NUXT_PUBLIC_CUSTOM_DOMAIN: ${{ vars.CUSTOM_DOMAIN }}
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: landing-page/.output/public
-          publish_branch: gh-pages
-          force_orphan: true
+          path: landing-page/.output/public
+
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
