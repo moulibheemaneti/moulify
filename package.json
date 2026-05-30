@@ -28,8 +28,8 @@
   ],
   "scripts": {
     "build:icons": "bun run scripts/generate-icon-fonts.ts",
-    "prepare": "husky",
-    "prepack": "nuxt-module-build build",
+    "prepare": "bun husky",
+    "prepack": "bunx nuxt-module-build build",
     "clean": "rm -rf playground/node_modules .nuxt dist node_modules bun.lock playground/dist",
     "clean-install": "bun run clean && bun i",
     "dev": "bun run dev:prepare && nuxt dev playground",
